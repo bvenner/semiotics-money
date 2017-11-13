@@ -1,5 +1,7 @@
 Unifying business and economic views.
 
+It looks like institutional theory has accomplished a lot of these goals, uniting institutional economics with organizational studies.  W. Richard Scott from Stanford is a major thought leader here.  Read the 4th edition of his text *Institutions and Organizations*.  Then come back to this essay.
+
 The book Stakeholder Theory reflects upon its foundations using Rorty's version of pragmatism.
 
 A semiotic theory would be a better foundation.
