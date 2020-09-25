@@ -1,28 +1,347 @@
+# Pandoc book template
+
+[![CircleCI](https://circleci.com/gh/wikiti/pandoc-book-template.svg?style=shield)](https://circleci.com/gh/wikiti/pandoc-book-template)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/wikiti/pandoc-book-template/blob/master/LICENSE.md)
+
+## Description
+
+This repository contains a simple template for building [Pandoc](http://pandoc.org/) documents;
+Pandoc is a suite of tools to compile markdown files into readable files (PDF, EPUB, HTML...).
+
+## Usage
+
+### Installing
+
+Please, check [this page](http://pandoc.org/installing.html) for more information. On ubuntu, it
+can be installed as the *pandoc* package:
+
+```sh
+sudo apt-get install pandoc
+```
+
+This template uses [make](https://www.gnu.org/software/make/) to build the output files, so don't
+forget to install it too:
+
+```sh
+sudo apt-get install make
+```
+
+To export to PDF files, make sure to install the following packages:
+
+```sh
+sudo apt-get install texlive-fonts-recommended texlive-xetex
+```
+
+### Folder structure
+
+Here's a folder structure for a Pandoc book:
+
+```
+my-book/         # Root directory.
+|- build/        # Folder used to store builded (output) files.
+|- chapters/     # Markdowns files; one for each chapter.
+|- images/       # Images folder.
+|  |- cover.png  # Cover page for epub.
+|- metadata.yml  # Metadata content (title, author...).
+|- Makefile      # Makefile used for building our books.
+```
+
+### Setup generic data
+
+Edit the *metadata.yml* file to set configuration data (note that it must start and end with `---`):
+
+```yml
 ---
-title: On Semiotic of Values
-author:  Bradley Venner
+title: My book title
+author: Daniel Herzog
+rights: MIT License
+lang: en-US
+tags: [pandoc, book, my-book, etc]
+abstract: |
+  Your summary.
+mainfont: DejaVu Sans
+
+# Filter preferences:
+# - pandoc-crossref
+linkReferences: true
 ---
+```
 
-The notion of prices as a language and system of communication is well established.  However, this language is taken to be extremely restricted within neoclassical economics.  The nature of this system is taken to be similar to a closed thermodynamic system with a uniquely determined value.  It is mechanical at it's core.
+You can find the list of all available keys on
+[this page](http://pandoc.org/MANUAL.html#extension-yaml_metadata_block).
 
-So what does a living (i.e. non-mechanical) theory of economics look like?  My plan for this investigation is to build upon the theories of value developed by Marx and Peirce.  Strydom believes in the close relationship of these two thinkers.  I would like to reframe their thought using modal homotopy type theory, as developed in [Categorical Semiotics](https://github.com/bvenner/categorical-semiotics).  A hint that this would be possible is provided by Lee Smolin's sole foray into economics, where he proposed gauge theory as an important direction for general equilibrium theory.  So could Schneider's development of gauge theory within modal homotopy type theory be useful here?
+### Creating chapters
 
-# Update: 5 March 2018
+Creating a new chapter is as simple as creating a new markdown file in the *chapters/* folder;
+you'll end up with something like this:
 
-Reading about Sraffa reminds me of Rosen's relational biology.  In particular, the notion of a self-reproducing economy sounds like Rosen's MR sytem.  
+```
+chapters/01-introduction.md
+chapters/02-installation.md
+chapters/03-usage.md
+chapters/04-references.md
+```
 
-# Update: 9 Aug 2018
+Pandoc and Make will join them automatically ordered by name; that's why the numeric prefixes are
+being used.
 
-A related branch to modal homotopy type theory that might be useful is Bell's paper *From Absolute to Local Mathematics* [@bell:1986:absolute].  Can this paper be applied to metrology?  My intuition is that the metrology of values looks more like the local metrology applicable in chemistry than the absolute metrology used in physics (I'd love to find this paper again!).  Ian Wright discusses the inspiration that the nascent physical metrology had on David Ricardo in his development of the labor theory of value [@wright:2017:marx].    Marx distinguishes between use-value and exchange-value, and that exchange value is based on the labor theory of value.  Marx argued that the "absolute" metrology of the labor theory of value, as derived from Ricardo, was the basis of the capitalist system.  My understanding is that Marx did not believe that this was the most desirable system, and that the free association of producers would somehow produce use-values without the mediation of exchange-values.  
+All you need to specify for each chapter at least one title:
 
-So could a socialist system be developed on a local metrology of use-values? This was the central issue in the [socialist calculation debate](https://en.wikipedia.org/wiki/Socialist_calculation_debate).  The Wikipedia article mentions distributed economic planning as the successor to this debate.  It also dicusses the use of information technology to provide much richer information about various flows than could be provided by prices.  The subheadings in the Wikipedia page on "Contemporary Contributions" are "networked digital feedback", "cybernetic coordination", "participatory economics", "decentralized pricing without markets", "market socialism", and "mechanism design."  I've heard of very few of the authors mentioned in this page.  There is also an unstated link with value flows, open-value accounting, and other efforts coming out of the P2P Foundation.   
+```md
+# Introduction
 
-Is there a duality between production and distribution in economics?  Neoclassical economics places distribution prior to production, while classical economics placed production ahead of distribution.  Is this a nature/nurture distinction?  It seems like it would be better to think of these as a relation with corresponding logical and physical transformations (a la Bell), the behavioral systems theory approach with relations and constraints, or Ellerman's analysis of adjoint functors as a profunctor (aka a generized relation).  A potentially interesting insight here is Martin's analogy in the *classical circular economy* of Sraffa's system as a replacement for the neoclassical production function and Sen's capability approach as a replacement for the neoclassical distribution system.  The relationship between this and Ian Wright's work solving Marx's transformation problem needs attention.  
+This is the first paragraph of the introduction chapter.
 
-Mirowski's comparison of neoclassical economics and analytical philosophy, and the potential relationship of intuitionistic economics and pragmatic philosophy [mirowski:1992:mechanism].  Veblen as the first economist to analyze monopoly capitalism (as cited by Foster [@foster:2016:endless], and Veblen's somewhat loose connection to the pragmatist tradition.  
+## First
 
-Read *The End of Value-Free Economics* [@putnam:2012:end], as this explores the link between pragmatism and the capability approach, with Putnam representing pragmatism and Walsh representing the capability approach.
+This is the first subsection.
 
-Martins:  
-> Nussbaum focuses essentially on Marx, and, more specifically, on the Aristotelian underpinnings of Marx's conception. [@martins:2018:classical].
-Unfortunately, Martins does not give an explicit textual link here.  But this would be interesting to explore.  Although Nussbuam's endorsement of Hickenlooper on The Ezra Klein Show makes me a lot less interested in studying the capabilities approach. 
+## Second
+
+This is the second subsection.
+```
+
+Each title (*#*) will represent a chapter, while each subtitle (*##*) will represent a chapter's
+section. You can use as many levels of sections as markdown supports.
+
+#### Manual control over page ordering
+
+You may prefer to have manual control over page ordering instead of using numeric prefixes.
+
+To do so, replace `CHAPTERS = chapters/*.md` in the Makefile with your own order. For example:
+
+```
+CHAPTERS += $(addprefix ./chapters/,\
+ 01-introduction.md\
+ 02-installation.md\
+ 03-usage.md\
+ 04-references.md\
+)
+```
+
+#### Links between chapters
+
+Anchor links can be used to link chapters within the book:
+
+```md
+// chapters/01-introduction.md
+# Introduction
+
+For more information, check the [Usage] chapter.
+
+// chapters/02-installation.md
+# Usage
+
+...
+```
+
+If you want to rename the reference, use this syntax:
+
+```md
+For more information, check [this](#usage) chapter.
+```
+
+Anchor names should be downcased, and spaces, colons, semicolons... should be replaced with hyphens.
+Instead of `Chapter title: A new era`, you have: `#chapter-title-a-new-era`.
+
+#### Links between sections
+
+It's the same as anchor links:
+
+```md
+# Introduction
+
+## First
+
+For more information, check the [Second] section.
+
+## Second
+
+...
+```
+
+Or, with al alternative name:
+
+```md
+For more information, check [this](#second) section.
+```
+
+### Inserting objects
+
+Text. That's cool. What about images and tables?
+
+#### Insert an image
+
+Use Markdown syntax to insert an image with a caption:
+
+```md
+![A cool seagull.](images/seagull.png)
+```
+
+Pandoc will automatically convert the image into a figure, using the title (the text between the
+brackets) as a caption.
+
+If you want to resize the image, you may use this syntax, available since Pandoc 1.16:
+
+```md
+![A cool seagull.](images/seagull.png){ width=50% height=50% }
+```
+
+#### Insert a table
+
+Use markdown table, and use the `Table: <Your table description>` syntax to add a caption:
+
+```md
+| Index | Name |
+| ----- | ---- |
+| 0     | AAA  |
+| 1     | BBB  |
+| ...   | ...  |
+
+Table: This is an example table.
+```
+
+#### Insert an equation
+
+Wrap a LaTeX math equation between `$` delimiters for inline (tiny) formulas:
+
+```md
+This, $\mu = \sum_{i=0}^{N} \frac{x_i}{N}$, the mean equation, ...
+```
+
+Pandoc will transform them automatically into images using online services.
+
+If you want to center the equation instead of inlining it, use double `$$` delimiters:
+
+```md
+$$\mu = \sum_{i=0}^{N} \frac{x_i}{N}$$
+```
+
+[Here](https://www.codecogs.com/latex/eqneditor.php)'s an online equation editor.
+
+#### Cross references
+
+Originally, this template used LaTeX labels for auto numbering on images, tables, equations or
+sections, like this:
+
+```md
+Please, admire the gloriousnes of Figure \ref{seagull_image}.
+
+![A cool seagull.\label{seagull_image}](images/seagull.png)
+```
+
+**However, these references only works when exporting to a LaTeX-based format (i.e. PDF, LaTeX).**
+
+In case you need cross references support on other formats, this template now support cross
+references using [Pandoc filters](https://pandoc.org/filters.html). If you want to use them, use a
+valid plugin and with its own syntax.
+
+Using [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref) is highly recommended, but
+there are other alternatives which use a similar syntax, like
+[pandoc-xnos](https://github.com/tomduck/pandoc-xnos).
+
+First, enable the filter on the *Makefile* by updating the `FILTER_ARGS` variable with your new
+filter(s):
+
+```make
+FILTER_ARGS = --filter pandoc-crossref
+```
+
+Then, you may use the filter cross references. For example, *pandoc-crossref*  uses
+`{#<type>:<id>}` for definitions and `@<type>:id` for referencing. Some examples:
+
+```md
+List of references:
+
+- Check @fig:seagull.
+- Check @tbl:table.
+- Check @eq:equation.
+
+List of elements to reference:
+
+![A cool seagull](images/seagull.png){#fig:seagull}
+
+$$ y = mx + b $$ {#eq:equation}
+
+| Index | Name |
+| ----- | ---- |
+| 0     | AAA  |
+| 1     | BBB  |
+| ...   | ...  |
+
+Table: This is an example table. {#tbl:table}
+```
+
+Check the desired filter settings and usage for more information
+([pandoc-crossref usage](http://lierdakil.github.io/pandoc-crossref/)).
+
+### Output
+
+This template uses *Makefile* to automatize the building process. Instead of using the *pandoc cli
+util*, we're going to use some *make* commands.
+
+#### Export to PDF
+
+Please note that PDF file generation requires some extra dependencies (~ 800 MB):
+
+```sh
+sudo apt-get install texlive-xetex ttf-dejavu
+```
+
+After installing the dependencies, use this command:
+
+```sh
+make pdf
+```
+
+The generated file will be placed in *build/pdf*.
+
+#### Export to EPUB
+
+Use this command:
+
+```sh
+make epub
+```
+
+The generated file will be placed in *build/epub*.
+
+#### Export to HTML
+
+Use this command:
+
+```sh
+make html
+```
+
+The generated file(s) will be placed in *build/html*.
+
+#### Export to DOCX
+
+Use this command:
+
+```sh
+make docx
+```
+
+The generated file(s) will be placed in *build/docx*.
+
+#### Extra configuration
+
+If you want to configure the output, you'll probably have to look the
+[Pandoc Manual](http://pandoc.org/MANUAL.html) for further information about pdf (LaTeX) generation,
+custom styles, etc, and modify the Makefile file accordingly.
+
+## References
+
+- [Pandoc](http://pandoc.org/)
+- [Pandoc Manual](http://pandoc.org/MANUAL.html)
+- [Wikipedia: Markdown](http://wikipedia.org/wiki/Markdown)
+
+## Contributors
+
+This project has been developed by:
+
+| Avatar | Name | Nickname | Email |
+| ------ | ---- | -------- | ----- |
+| ![](http://www.gravatar.com/avatar/2ae6d81e0605177ba9e17b19f54e6b6c.jpg?s=64)  | Daniel Herzog | Wikiti | [info@danielherzog.es](mailto:info@danielherzog.es)
