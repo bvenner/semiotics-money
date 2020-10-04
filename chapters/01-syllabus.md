@@ -1,3 +1,1 @@
-# Literature
-
-Here is a review of existing methods.
+# To Do:  auto-generated syllabus from table of contents.
